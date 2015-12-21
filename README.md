@@ -43,12 +43,12 @@
 |3   | Write a shell provisioner for Ansible  |  DONE |
 |4   | Write config & inventory files for Ansible  |  DONE |
 |5   | Test the vagrant VM and provisioner is working smoothly  |  DONE |
-|5   | Initialise repo, .gitignore files, remote repo, initial baseline commit, push to remote github repo  |  DOING |
-|6   | Write playbook for installing and configuring MySQL 5.5  |  TODO |
-|7   | Write playbook for installing, starting and enabling httpd 2.4 web server  | TODO  |
-|8   | Write playbook for installing PHP 5 and tuning it for Drupal CMS  |  TODO |
-|9   | Write playbook for installing Drush 7  |  TODO |
-|10  | Write playbook for installing Drupal 7  |  TODO |
+|5   | Initialise repo, .gitignore files, remote repo, initial baseline commit, push to remote github repo  |  DONE |
+|6   | Write playbook for installing and configuring MySQL 5.5  |  DOING |
+|7   | Write playbook for installing, starting and enabling httpd 2.4 web server  | DOING  |
+|8   | Write playbook for installing PHP 5 and tuning it for Drupal CMS  |  DOING |
+|9   | Write playbook for installing Drush 7  |  DOING |
+|10  | Write playbook for installing Drupal 7  |  DOING |
 |11  | Write playbook for enabling SSL on the drupal instance  | TODO  |
 |12  | Write playbook for enabling RSS feeds module of drupal  | TODO  |
 |13  | Create a view in Drupal and enable RSS for the view  | TODO  |
