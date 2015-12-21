@@ -1,0 +1,5 @@
+# Ignore vagrant internal folder
+.vagrant
+
+# Ignore SSL certificate key files
+www/keys/*.*
