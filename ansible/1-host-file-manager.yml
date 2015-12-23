@@ -1,0 +1,16 @@
+# -------------------------------------------------------------------#
+# Creates entries in hosts file                                      #
+# -------------------------------------------------------------------#
+
+- name: Set hosts file to sync with inventory and runs on the ansible host
+  hosts: 127.0.0.1
+  sudo: yes
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: Alt CMS Development server  
+    lineinfile: dest=/etc/hosts regexp='^192.129.43.10' line='192.129.43.10 altcms_dev_svr' state=present
+  - name: Alt CMS Staging server  
+    lineinfile: dest=/etc/hosts regexp='^192.129.43.11' line='192.129.43.11 altcms_staging_svr' state=absent
+  - name: Alt CMS Production server
+    lineinfile: dest=/etc/hosts regexp='^192.129.43.12' line='192.129.43.12 altcms_prod_svr' state=absent

@@ -1,0 +1,20 @@
+# -------------------------------------------------------------------#
+# Install MariaDB (MySQL) server instance - latest epel release      #
+# -------------------------------------------------------------------#
+
+- name: Install MariaDB (MySQL) on the vm instance
+  hosts: 127.0.0.1
+  sudo: yes
+  gather_facts: no
+  connection: local
+  
+  tasks:
+  - name: Install MariaDB (MySQL) Server
+    yum: name={{ item }} enablerepo=epel state=latest update_cache=yes
+    with_items:
+    - mariadb
+    - mariadb-server
+    - MySQL-python
+
+  - name: Start and enable MariaDB (MySQL) service
+    service: name=mariadb state=started enabled=true

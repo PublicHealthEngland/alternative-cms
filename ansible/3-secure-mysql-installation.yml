@@ -1,0 +1,51 @@
+# -------------------------------------------------------------------------------------------#
+# Secures MariaDB (MySQL) installation                                                       #
+# - aims to do the same things as mysql_secure_installation script                           #
+# This is expected to be executed only once!!!
+# -------------------------------------------------------------------------------------------#
+
+- name: Secures MySQL installation
+  hosts: 127.0.0.1
+  sudo: yes
+  gather_facts: no
+  connection: local
+  vars:
+     mysql_root_password: "{{ lookup('env','MYSQL_ROOT_PSWD') }}"
+  
+  tasks:
+
+# Remove all anonymous mysql users
+  - name: Removes all anonymous user account
+    mysql_user: user='' state=absent host={{ item }}
+    with_items:
+    - altcms_dev_svr
+    - ::1
+    - 127.0.0.1
+    - localhost
+
+# Remove test database
+  - name: Removes the MySQL test database
+    mysql_db: db=test state=absent
+
+# Set root password on first run
+  - name: Sets the root password on first run
+    mysql_user: login_user=root login_password='' name=root password={{ mysql_root_password }} priv=*.*:ALL,GRANT host={{ item }}
+    with_items:
+    - altcms_dev_svr
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+# Transfer and secure password in ~/.my.cnf
+  - name: client 
+    lineinfile: dest=~/.my.cnf create=yes regexp='^[client]' line=[client] state=present owner=root group=root mode=0600
+    
+  - name: user 
+    lineinfile: dest=~/.my.cnf create=yes regexp='^user=root' line='user=root' state=present owner=root group=root mode=0600
+
+  - name: password 
+    lineinfile: dest=~/.my.cnf create=yes regexp='^password={{ mysql_root_password }}' line='password={{ mysql_root_password }}' state=present owner=root group=root mode=0600
+
+# Restart services
+  - name: Re-Start MariaDB (MySQL) service
+    service: name=mariadb state=restarted

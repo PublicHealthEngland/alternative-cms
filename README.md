@@ -44,7 +44,7 @@
 |4   | Write config & inventory files for Ansible  |  DONE |
 |5   | Test the vagrant VM and provisioner is working smoothly  |  DONE |
 |5   | Initialise repo, .gitignore files, remote repo, initial baseline commit, push to remote github repo  |  DONE |
-|6   | Write playbook for installing and configuring MySQL 5.5  |  DOING |
+|6   | Write playbook for installing and securing MariaDB (MySQL)  |  DONE |
 |7   | Write playbook for installing, starting and enabling httpd 2.4 web server  | DOING  |
 |8   | Write playbook for installing PHP 5 and tuning it for Drupal CMS  |  DOING |
 |9   | Write playbook for installing Drush 7  |  DOING |
