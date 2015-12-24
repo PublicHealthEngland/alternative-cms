@@ -10,11 +10,11 @@
 1. Vagrant plugins - vagrant-vbguest and vagrant-proxyconf on the host.
 1. CentOS-7 as guest operating system.
 1. Ansible for managing tasks on the guest and release to staging and production.
-1. MySQL 5.5 for RDBMS on the guest.
-1. Apache 2.4 as web server on the guest.
-1. PHP 5 as application server runtime on the guest.
-1. Drush 7 for managing Drupal on the guest.
-1. Drupal 7 for host CMS solution on the guest.
+1. MariaDB (MySQL - from official yum repository) for RDBMS on the guest.
+1. Apache 2.4 (from official yum repository) as web server on the guest.
+1. PHP 5 (from official yum repository) as application server runtime on the guest.
+1. Drush 7 (from official yum repository) for managing Drupal on the guest.
+1. Drupal 7 (from official yum repository)for host CMS solution on the guest.
 
 ## Installation instructions
 
@@ -45,8 +45,8 @@
 |5   | Test the vagrant VM and provisioner is working smoothly  |  DONE |
 |5   | Initialise repo, .gitignore files, remote repo, initial baseline commit, push to remote github repo  |  DONE |
 |6   | Write playbook for installing and securing MariaDB (MySQL)  |  DONE |
-|7   | Write playbook for installing, starting and enabling httpd 2.4 web server  | DOING  |
-|8   | Write playbook for installing PHP 5 and tuning it for Drupal CMS  |  DOING |
+|7   | Write playbook for installing PHP 5 and tuning it for Drupal CMS  |  DOING |
+|8   | Write playbook for installing, starting and enabling httpd 2.4 web server  | DOING  |
 |9   | Write playbook for installing Drush 7  |  DOING |
 |10  | Write playbook for installing Drupal 7  |  DOING |
 |11  | Write playbook for enabling SSL on the drupal instance  | TODO  |
