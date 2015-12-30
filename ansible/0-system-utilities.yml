@@ -1,0 +1,16 @@
+# O/S system utilities like vim, git etc
+- name: O/S Utilities
+  hosts: localhost
+  sudo: yes
+  gather_facts: no
+  remote_user: vagrant
+
+  tasks:
+
+  - name: Install vim-enhanced
+    yum: name={{ item }} state=latest update_cache=yes
+    with_items:
+    - vim-enhanced
+
+  - name: Set alias vi=vim  
+    lineinfile: dest=/etc/profile regexp='^alias vi=vim' line='alias vi=vim' state=present
