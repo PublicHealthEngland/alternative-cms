@@ -10,7 +10,7 @@
   
   tasks:
   - name: Install MariaDB (MySQL) Server
-    yum: name={{ item }} enablerepo=epel state=latest update_cache=yes
+    yum: name={{ item }} state=latest update_cache=yes
     with_items:
     - mariadb
     - mariadb-server

@@ -11,7 +11,7 @@
   
   tasks:
   - name: Install httpd service
-    yum: name=httpd enablerepo=epel state=latest update_cache=yes
+    yum: name=httpd state=latest update_cache=yes
     notify: Start and enable httpd services
 
   - name: Start and enable httpd services

@@ -1,0 +1,22 @@
+# -------------------------------------------------------------------#
+# Enables firewall rules for http, https and ssh traffics            #
+# -------------------------------------------------------------------#
+
+- name: Enables firewall rules
+  hosts: 127.0.0.1
+  sudo: yes
+  gather_facts: no
+  connection: local
+  
+  tasks:
+
+  - name: Set firewall rules for http https and ssh traffics
+    firewalld: port={{ item }} permanent=true state=enabled
+    with_items:
+    - 80/tcp
+    - 443/tcp
+    - 22/tcp
+    - 2222/tcp
+
+  - name: Enable and start firewalld
+    service: name=firewall state=started enabled=true
