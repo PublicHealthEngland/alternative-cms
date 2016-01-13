@@ -1,0 +1,24 @@
+# Manage services
+
+- name: Restart services
+  hosts: localhost
+  sudo: yes
+  gather_facts: no
+  remote_user: vagrant
+
+  tasks:
+
+  - name: Restart MariaDB
+    service:
+      name: mariadb
+      state: restarted
+      enabled: true
+
+  - name: Restart Apache
+    service:
+      name: httpd
+      state: restarted
+      enabled: true
+
+  - name: Reload firewall
+    command: firewall-cmd --reload

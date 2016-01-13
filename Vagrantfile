@@ -3,8 +3,8 @@
 
 # If you are using a proxy, you should set these environment variables
 # for use with the vagrant-proxyconf plugin
-#   VAGRANT_HTTP_PROXY  = http://[username:password@][host]:[port]
-#   VAGRANT_HTTPS_PROXY = http://[username:password@][host]:[port]
+#   VAGRANT_HTTP_PROXY  = http://[domain\username:password@][host]:[port]
+#   VAGRANT_HTTPS_PROXY = http://[domain\username:password@][host]:[port]
 
 # Check for required plugins
 required_plugins = ['vagrant-vbguest', 'vagrant-proxyconf']
@@ -23,6 +23,6 @@ Vagrant.configure(2) do |config|
       vb.memory = "512"
       vb.name = "Drupal_Host"
     end
-      guest_config.vm.provision :shell, path: "bin/bootstrap-ansible.sh"
+      guest_config.vm.provision :shell, path: "bin/systembootstrap.sh"
   end
 end

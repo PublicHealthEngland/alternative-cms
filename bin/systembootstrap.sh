@@ -7,3 +7,9 @@ yum update -y
 # the ansible package is only available if epel-release is installed
 sudo yum install -y epel-release
 sudo yum install -y ansible
+
+# Play ansible playbooks
+
+for playbook in $( ls /vagrant/ansible/*.yml ); do
+	ansible-playbook -vvv $playbook
+done

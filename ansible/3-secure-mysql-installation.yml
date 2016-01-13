@@ -10,7 +10,7 @@
   gather_facts: no
   connection: local
   vars:
-     mysql_root_password: "{{ lookup('env','MYSQL_ROOT_PSWD') }}"
+     mysql_root_password: "{{ lookup('password', '~/mysql_root_password') }}"
   
   tasks:
 

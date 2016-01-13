@@ -1,0 +1,70 @@
+- name: Drupal installation
+  hosts: localhost
+  become: yes
+  gather_facts: no
+  remote_user: vagrant
+
+  tasks:
+
+    - name: disable selinux
+      command: setenforce 0
+
+    - name: download drupal 7.41 tarball
+      get_url: url='http://ftp.drupal.org/files/projects/drupal-7.41.tar.gz' dest=/home/vagrant
+
+    - name: Unpack the drupal tarball 
+      unarchive: 
+        src: /home/vagrant/drupal-7.41.tar.gz 
+        dest: /var/www/html
+        copy: no
+        owner: apache
+        group: apache
+        mode: 0755
+
+    - name: Drupal fresh download check
+      stat: path=/var/www/html/drupal-7.41
+      register: drupal_fresh_download
+
+    - name: Move new drupal to alternativesystem
+      when: drupal_fresh_download.stat.exists
+      command: mv drupal-7.41 alternativesystem
+      args:
+        chdir: /var/www/html
+
+    - name: Install Drupal
+
+      # TODO - Obtain admin account password from command line & use a named user for drupal rather than root
+
+      shell: drush -v -y site-install --db-url=mysql://root:{{ lookup('password', '~/mysql_root_password') }}@localhost:3306/alternativesystem --db-su=root --db-su-pw={{ lookup('password', '~/mysql_root_password') }} --site-name="alternativesystem" --locale=en-GB --account-name=admin --account-pass=12345678
+      become: yes
+      args:
+        chdir: /var/www/html/alternativesystem/
+
+      # After Drupal is installed, its "File system" settings need to be configured (/admin/config/media/file-system) and the `private file system path` variable set to the folder that the files were uploaded to. (See /README.md)
+
+    - name: Database update
+      shell: drush -v -y updb
+      args:
+        chdir: /var/www/html/alternativesystem/
+
+    - name: Download views module
+      shell: drush -v -y dl views
+      args:
+        chdir: /var/www/html/alternativesystem/
+
+    - name: Enablew views module
+      shell: drush -v -y en views views_ui
+      args:
+        chdir: /var/www/html/alternativesystem/
+
+    # /sites/defaults/files should exist and owned/writable by apache
+    - name: Appropriate settings for files folder
+      file:
+        path: /var/www/html/alternativesystem/sites/default/files
+        state: directory
+        owner: apache
+        group: apache
+        mode: 0777
+
+    - name: enable selinux back
+      command: setenforce 0

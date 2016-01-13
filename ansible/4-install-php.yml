@@ -15,3 +15,15 @@
     - php
     - php-mysql
     - php-gd
+
+  - name: Configure php.ini
+    lineinfile:
+      dest: /etc/php.ini
+      regexp: ^{{ item.key }}\s*=
+      state: present
+      line: '{{ item.key }} = {{ item.value }}'
+    with_items:
+      - { key: 'upload_max_filesize', value: '10M' }
+      - { key: 'post_max_size', value: '10M' }
+      - { key: 'memory_limit', value: '128M' }
+      - { key: 'realpath_cache_size', value: '256k' }

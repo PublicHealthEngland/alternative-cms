@@ -1,4 +1,4 @@
-# -------------------------------------------------------------------#
+ # -------------------------------------------------------------------#
 # Enables firewall rules for http, https and ssh traffics            #
 # -------------------------------------------------------------------#
 
@@ -18,5 +18,5 @@
     - 22/tcp
     - 2222/tcp
 
-  - name: Enable and start firewalld
-    service: name=firewall state=started enabled=true
+  - name: Reload firewalld
+    service: name=firewalld state=started enabled=true
