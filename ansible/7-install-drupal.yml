@@ -65,6 +65,10 @@
         owner: apache
         group: apache
         mode: 0777
+    #settigs for pubic folder
+    - shell: chcon -Rt public_content_rw_t sites/default/files
+    #selinux settings for public folder
+    - shell: setsebool -P allow_httpd_anon_write=1
 
     - name: enable selinux back
       command: setenforce 0
